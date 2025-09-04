@@ -1,0 +1,279 @@
+/* =========================================================
+   Housemates Chore Helper – Light Theme (no dark mode)
+   ========================================================= */
+
+/* ---------- Theme Tokens ---------- */
+:root{
+  --bg:#f7faff;
+  --card:#ffffff;
+  --text:#111827;
+  --muted:#6b7280;
+  --line:#e5e7eb;
+  --primary:#2563eb;
+  --primary-weak:#eef2ff;
+  --ok:#10b981;
+  --danger:#ef4444;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0 6px 16px rgba(0,0,0,.08);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --focus: 0 0 0 3px rgba(37,99,235,.3);
+}
+
+/* ---------- Base ---------- */
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+.muted{ color:var(--muted); }
+
+/* ---------- Header ---------- */
+.app-header{
+  padding:20px 16px;
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:8px;
+  background:linear-gradient(180deg, var(--card), color-mix(in oklab, var(--card) 60%, var(--bg)));
+  border-bottom:1px solid var(--line);
+}
+.app-header h1{
+  margin:0;
+  font-size:24px;
+  letter-spacing:.2px;
+  display:flex; align-items:center; gap:8px;
+}
+.app-header h1::before{ content:"🏠"; font-size:22px; }
+.userbar{ display:flex; align-items:center; gap:10px; }
+
+/* Optional micro-tagline under title */
+.app-subtitle{
+  width:100%; margin:4px 0 0; font-size:14px; color:var(--muted);
+}
+
+/* ---------- Layout ---------- */
+.container{ max-width:1100px; margin:20px auto; padding:0 16px; }
+
+/* ---------- Tabs ---------- */
+.tabs{ display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; }
+.tab{
+  border:1px solid var(--line);
+  background:var(--card);
+  padding:8px 12px;
+  border-radius:999px;
+  cursor:pointer;
+  box-shadow:var(--shadow-sm);
+  display:inline-flex; align-items:center; gap:8px;
+  transition:background .2s ease, color .2s ease, transform .08s ease, border-color .2s ease;
+  will-change:transform;
+}
+.tab:hover{ transform:translateY(-1px); }
+.tab:focus-visible{ outline:none; box-shadow:var(--focus); }
+.tab.active{ border-color:var(--primary); color:#fff; background:var(--primary); }
+.tab .badge{
+  margin-left:2px; background:var(--primary-weak);
+  color:color-mix(in oklab, var(--primary) 75%, black);
+  border-radius:999px; padding:2px 8px; font-size:12px; font-weight:600;
+}
+.tab.active .badge{ background:#ffffff24; color:#fff; }
+
+/* ---------- Inputs & Buttons ---------- */
+.input{
+  border:1px solid var(--line); background:var(--card); color:var(--text);
+  padding:9px 11px; border-radius:var(--radius-sm); min-width:160px;
+  transition:border-color .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+}
+.input.grow{ width:100%; }
+.input:focus{ outline:none; border-color:var(--primary); box-shadow:var(--focus); }
+.label{ display:block; margin:6px 0 4px; color:var(--muted); font-size:14px; }
+
+.btn{
+  border:1px solid transparent; padding:8px 12px; border-radius:var(--radius-sm);
+  cursor:pointer; transition:transform .08s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  box-shadow:var(--shadow-sm);
+}
+.btn:hover{ transform:translateY(-1px); box-shadow:var(--shadow-md); }
+.btn:focus-visible{ outline:none; box-shadow:var(--focus); }
+.btn.small{ padding:6px 10px; font-size:14px; }
+.btn.primary{ background:var(--primary); color:#fff; }
+.btn.ghost{ background:var(--card); border:1px solid var(--line); color:var(--text); }
+.btn.ok{ background:var(--ok); color:#fff; }
+.btn.danger{ background:var(--danger); color:#fff; }
+
+/* ---------- Create row ---------- */
+.create{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:14px; margin-bottom:16px; box-shadow:var(--shadow-sm);
+}
+.create h2{ margin:0 0 10px; font-size:18px; }
+.create-row{ display:flex; gap:10px; }
+@media (max-width:700px){ .create-row{ flex-direction:column; } }
+
+/* ---------- Section header ---------- */
+.list-header{ display:flex; align-items:center; justify-content:space-between; margin:18px 0 10px; }
+
+/* ---------- Pills / chips ---------- */
+.pill{
+  background:var(--primary-weak);
+  color:color-mix(in oklab, var(--primary) 70%, black);
+  padding:8px 10px; border-radius:999px; font-weight:600;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.pill.kitchen{ background:#fff1f2; color:#be123c; }
+.pill.living{ background:#ecfeff; color:#0e7490; }
+.pill.shoes{ background:#f5f3ff; color:#6d28d9; }
+.pill.washroom{ background:#f0fdf4; color:#15803d; }
+.pill.laundry{ background:#fefce8; color:#a16207; }
+
+/* ---------- Table ---------- */
+.task-table{
+  width:100%; border-collapse:collapse; background:var(--card);
+  border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm);
+}
+.task-table th, .task-table td{
+  border-bottom:1px solid var(--line); padding:10px 12px; text-align:left; vertical-align:top;
+}
+.task-table thead th{ background:color-mix(in oklab, var(--card) 70%, var(--bg)); font-weight:600; font-size:14px; }
+.task-table tr:hover td{ background:color-mix(in oklab, var(--card) 95%, var(--bg)); }
+.task-table tr.done td{ color:color-mix(in oklab, var(--ok) 60%, var(--text)); }
+
+/* ---------- Toast ---------- */
+.toast{
+  position:fixed; left:50%; bottom:24px; transform:translateX(-50%);
+  background:#111827; color:#fff;
+  padding:12px 16px; border-radius:10px; opacity:0; pointer-events:none;
+  transition:opacity .25s ease, transform .25s ease; z-index:1100;
+  box-shadow:0 14px 40px rgba(0,0,0,.35);
+}
+.toast.show{ opacity:1; transform:translateX(-50%) translateY(-4px); }
+
+/* ---------- Modal ---------- */
+.modal-backdrop{
+  position:fixed; inset:0; background:rgba(0,0,0,.35);
+  display:flex; align-items:center; justify-content:center; padding:16px; z-index:1200; cursor:pointer;
+}
+.modal-backdrop[hidden]{ display:none !important; }
+.modal{
+  width:min(900px, 95vw); background:var(--card); border-radius:var(--radius); border:1px solid var(--line);
+  box-shadow:0 20px 50px rgba(0,0,0,.15); max-height:80vh; overflow:auto; cursor:auto;
+}
+.modal:focus { outline:2px solid var(--primary); outline-offset:2px; }
+.modal-head{ display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid var(--line); }
+.modal .filters{ padding:12px 16px; border-bottom:1px solid var(--line); display:flex; gap:10px; flex-wrap:wrap; }
+.modal table{ margin:16px; width:calc(100% - 32px); }
+
+/* ---------- Footer ---------- */
+.footer{ text-align:center; color:var(--muted); padding:30px 16px; }
+
+/* ---------- Mobile task cards (used by JS on small screens) ---------- */
+.task-card{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:10px 12px; box-shadow:var(--shadow-sm);
+}
+.task-card__top{ display:flex; justify-content:space-between; align-items:center; gap:10px; }
+.task-card__area{ font-weight:600; color:var(--muted); }
+.task-card__title{ margin:8px 0; font-weight:600; }
+.task-card__status{ font-size:14px; color:var(--muted); }
+.task-card.done .task-card__title{ color:color-mix(in oklab, var(--ok) 60%, var(--text)); }
+
+/* =========================================================
+   Mobile-first tweaks
+   ========================================================= */
+@media (max-width:640px){
+  body{ font-size:15px; }
+  .app-header{ padding:14px 12px; gap:6px; }
+  .app-header h1{ font-size:20px; }
+  .container{ padding:0 12px; }
+
+  /* Tabs: horizontal scroll pills */
+  .tabs{ overflow-x:auto; -webkit-overflow-scrolling:touch; gap:6px; padding-bottom:4px; flex-wrap:nowrap; }
+  .tabs::-webkit-scrollbar{ display:none; }
+  .tab{ white-space:nowrap; padding:8px 10px; }
+
+  /* Inputs & buttons bigger for touch */
+  .create{ padding:12px; }
+  .btn.small{ padding:8px 12px; }
+
+  /* Header & filters stack */
+  .list-header{ flex-direction:column; align-items:flex-start; gap:8px; }
+  .list-header .filters{ width:100%; display:flex; gap:8px; flex-wrap:wrap; }
+  .pill{ display:block; width:100%; text-align:center; }
+
+  /* TABLE -> stacked cards */
+  .task-table{ display:block; border:0; box-shadow:none; }
+  .task-table thead{ display:none; }
+  .task-table tbody{ display:block; }
+  .task-table tr{
+    display:block; background:var(--card); border:1px solid var(--line);
+    border-radius:var(--radius); margin:10px 0; overflow:hidden; box-shadow:var(--shadow-sm);
+  }
+  .task-table td{
+    display:flex; justify-content:space-between; align-items:flex-start; gap:12px;
+    border-bottom:1px solid var(--line); padding:10px 12px;
+  }
+  .task-table tr.done td{ color:color-mix(in oklab, var(--ok) 60%, var(--text)); }
+  .task-table td:last-child{ border-bottom:0; }
+
+  /* Labels shown on left in stacked rows */
+  .task-table td::before{
+    content: attr(data-label); font-weight:600; color:var(--muted);
+    flex:0 0 45%; max-width:45%;
+  }
+
+  /* Action buttons spacing */
+  .task-table td > .btn{ margin-left:6px; }
+
+  /* Modal: near full-screen on phones */
+  .modal-backdrop{ padding:0; }
+  .modal{ width:100vw; height:92vh; max-height:none; border-radius:12px 12px 0 0; }
+  .modal .filters{ padding:10px; gap:8px; }
+}
+
+/* ===== Login page polish ===== */
+.auth-wrap{
+  min-height: 100dvh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(1200px 600px at -10% -10%, color-mix(in oklab, var(--primary) 8%, transparent) 0%, transparent 60%),
+    radial-gradient(900px 500px at 110% 120%, color-mix(in oklab, var(--ok) 10%, transparent) 0%, transparent 65%),
+    var(--bg);
+}
+.auth-card{
+  width: min(560px, 92vw);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 18px 18px 16px;
+}
+.auth-head h1{
+  margin: 0 0 6px;
+  font-size: 26px;
+  letter-spacing: .2px;
+}
+.auth-subtitle{ margin: 0 0 14px; color: var(--muted); }
+.auth-form{ display: grid; gap: 10px; }
+.auth-passrow{ display: flex; gap: 8px; align-items: stretch; }
+.auth-btn{ width: 100%; margin-top: 6px; }
+.auth-error{
+  margin: 8px 0 0;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in oklab, var(--danger) 45%, var(--line));
+  background: color-mix(in oklab, var(--danger) 8%, var(--card));
+  color: color-mix(in oklab, var(--danger) 70%, black);
+  border-radius: 10px;
+}
+.auth-error.pop{ animation: authPop .18s ease-out; }
+@keyframes authPop {
+  from { transform: scale(.98); opacity: .7; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.auth-foot{ margin-top: 14px; text-align: center; color: var(--muted); }

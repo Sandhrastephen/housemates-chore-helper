@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enter Code • Housemates Chore Helper</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Minimal polish to match the look in your screenshot */
+    .login-page { background: #f6f9ff; min-height: 100vh; }
+    .login-wrap { max-width: 520px; margin: 3rem 1rem; }
+    .card {
+      background: #fff; border-radius: 16px; padding: 24px 20px;
+      box-shadow: 0 8px 30px rgba(16,24,40,.08);
+    }
+    .stack>* { margin-block: .75rem; }
+    .title { font-size: 2.2rem; font-weight: 800; letter-spacing:.2px; margin:0 0 .25rem 0;}
+    .sub { color: #667085; margin:0 0 1.25rem 0; }
+    .label { font-weight: 600; margin-bottom: .25rem; display:block; color:#344054; }
+    .input, .select {
+      width:100%; border:1px solid #D0D5DD; border-radius:10px; padding:.8rem .9rem;
+      font-size:1rem; outline:none; background:#f8fafc;
+    }
+    .input:focus, .select:focus { border-color:#84a6ff; background:#fff; }
+    .btn.primary {
+      width:100%; padding:.85rem 1rem; border:none; border-radius:10px;
+      background:#2d64ff; color:#fff; font-weight:600; cursor:pointer;
+    }
+    .btn.primary:disabled { opacity:.55; cursor:not-allowed; }
+    .error { color:#b00020; min-height:1.25rem; margin-top:.25rem; }
+  </style>
+</head>
+<body class="login-page">
+  <main class="container login-wrap">
+    <section class="card">
+      <h1 class="title">Housemates Chore Helper</h1>
+      <p class="sub">Enter the house code and select your group to continue.</p>
+
+      <form id="loginForm" class="stack" autocomplete="off" novalidate>
+        <div>
+          <label class="label" for="houseCode">House code</label>
+          <input id="houseCode" class="input" type="password" inputmode="numeric" placeholder="••••" required />
+        </div>
+
+        <div>
+          <label class="label" for="memberSelect">We are</label>
+          <select id="memberSelect" class="select" required></select>
+        </div>
+
+        <div class="error" id="errMsg"></div>
+
+        <button id="continueBtn" class="btn primary" type="submit">Continue</button>
+      </form>
+    </section>
+  </main>
+
+  <script>
+(function initLogin() {
+  const members = (window.MEMBERS && Array.isArray(window.MEMBERS))
+    ? window.MEMBERS
+    : ["Sandhra & Sandrima","Priyanka & Jatin","Jibin & Josna","Melvin"];
+
+  const select = document.getElementById('memberSelect');
+  members.forEach(name => {
+    const opt = document.createElement('option');
+    opt.value = name; opt.textContent = name;
+    select.appendChild(opt);
+  });
+
+  const form = document.getElementById('loginForm');
+  const codeEl = document.getElementById('houseCode');
+  const err = document.getElementById('errMsg');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    err.textContent = "";
+
+    const code = (codeEl.value || "").trim();
+    const chosen = select.value;
+
+    const expected = (typeof window.HOUSE_CODE === "string" && window.HOUSE_CODE.length)
+      ? window.HOUSE_CODE
+      : null;
+
+    if (expected && code !== expected) {
+      err.textContent = "Invalid house code. Please try again.";
+      codeEl.focus();
+      codeEl.select();
+      return;
+    }
+    if (!expected && code.length < 1) {
+      err.textContent = "Please enter your house code.";
+      codeEl.focus();
+      return;
+    }
+
+    // ✅ Save session consistently
+    localStorage.setItem("rch_currentUser", chosen);
+    localStorage.setItem("rch_houseCode", code);
+
+    window.location.href = "index.html";
+  });
+})();
+</script>

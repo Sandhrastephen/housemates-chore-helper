@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Housemates Chore Helper</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Housemates Chore Helper</h1>
+    <div class="userbar">
+      <span id="helloUser" class="muted"></span>
+      <button id="signOutBtn" class="btn ghost small">Sign out</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" data-filter="All">All <span class="badge">0/0</span></button>
+      <button class="tab" data-filter="Kitchen">Kitchen <span class="badge">0/0</span></button>
+      <button class="tab" data-filter="Living Room">Living Room <span class="badge">0/0</span></button>
+      <button class="tab" data-filter="Shoe Rack Area">Shoe Rack Area <span class="badge">0/0</span></button>
+      <button class="tab" data-filter="Washroom">Washroom <span class="badge">0/0</span></button>
+      <button class="tab" data-filter="Laundry Room">Laundry Room <span class="badge">0/0</span></button>
+    </div>
+
+    <!-- Create row -->
+    <section class="create">
+      <h2>Add a custom task</h2>
+      <div class="create-row">
+        <label class="label" for="areaSelect">Area</label>
+        <select id="areaSelect" class="input">
+          <option>Kitchen</option>
+          <option>Living Room</option>
+          <option>Shoe Rack Area</option>
+          <option>Washroom</option>
+          <option>Laundry Room</option>
+        </select>
+
+        <input id="taskInput" class="input grow" placeholder="Task title…" />
+        <button id="addBtn" class="btn primary">Add</button>
+
+        <div class="filters">
+          <button id="openAreaHistoryBtn" class="btn ghost small">Area history</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- List -->
+    <main id="appMain">
+      <div class="list-header">
+        <h2 id="listTitle" class="muted" style="margin:0;">All – Tasks</h2>
+        <div class="filters"></div>
+      </div>
+
+      <table class="task-table" aria-label="Tasks">
+        <thead>
+          <tr><th>Area</th><th>Task</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="taskList"></tbody>
+      </table>
+    </main>
+
+    <p class="footer">Made for our house ✨</p>
+  </div>
+
+  <!-- Area History Modal -->
+  <div id="areaHistoryModal" class="modal-backdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="areaHistTitle" tabindex="-1">
+      <div class="modal-head">
+        <h3 id="areaHistTitle" style="margin:0;">Area completion history</h3>
+        <button id="closeAreaHistoryBtn" class="btn ghost small">Close</button>
+      </div>
+      <div class="filters">
+        <label class="label" for="areaHistMember">Member</label>
+        <select id="areaHistMember" class="input">
+          <option>Me</option>
+          <option>All</option>
+          <option>Sandhra &amp; Sandrima</option>
+          <option>Priyanka &amp; Jatin</option>
+          <option>Jibin &amp; Josna</option>
+          <option>Melvin</option>
+        </select>
+
+        <label class="label" for="areaHistArea">Area</label>
+        <select id="areaHistArea" class="input">
+          <option>All</option>
+          <option>Kitchen</option>
+          <option>Living Room</option>
+          <option>Shoe Rack Area</option>
+          <option>Washroom</option>
+          <option>Laundry Room</option>
+        </select>
+
+        <label class="label" for="areaHistMonth">Month</label>
+        <input id="areaHistMonth" class="input" type="month" />
+        <button id="areaExportBtn" class="btn small">Export CSV</button>
+      </div>
+
+      <table class="task-table">
+        <thead><tr><th>Date/Time</th><th>Member</th><th>Area</th></tr></thead>
+        <tbody id="areaHistoryList"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
